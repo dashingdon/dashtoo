@@ -1,0 +1,153 @@
+[package]
+name = "tdf"
+version = "0.1.0"
+authors = ["June Welker <junewelker@gmail.com>"]
+edition = "2021"
+description = "A terminal viewer for PDFs"
+readme = "README.md"
+homepage = "https://github.com/itsjunetime/tdf"
+repository = "https://github.com/itsjunetime/tdf"
+license = "MPL-2.0"
+keywords = ["pdf", "tui", "cli", "terminal"]
+categories = ["command-line-utilities", "text-processing", "visualization"]
+default-run = "tdf"
+
+[[bin]]
+name = "tdf"
+
+# lib only exists for benching
+[lib]
+name = "tdf"
+
+[dependencies]
+poppler-rs = { version = "0.24.1", default-features = false, features = ["v23_7"] }
+cairo-rs = { version = "0.20.0", default-features = false, features = ["png"] }
+# we're using this branch because it has significant performance fixes that I'm waiting on responses from the upstream devs to get upstreamed. See https://github.com/ratatui-org/ratatui/issues/1116
+ratatui = { git = "https://github.com/itsjunetime/ratatui.git" }
+# ratatui = { path = "./ratatui/ratatui" }
+# We're using this to have the vb64 feature (for faster base64 encoding, since that does take up a good bit of time when converting images to the Box<dyn ratatui_image::Protocol>. It also just includes a few more features that I'm waiting on main to upstream
+ratatui-image = { git = "https://github.com/itsjunetime/ratatui-image.git", branch = "vb64_on_personal", default-features = false }
+# ratatui-image = { path = "./ratatui-image", features = ["vb64"], default-features = false }
+crossterm = { version = "0.28.1", features = ["event-stream"] }
+image = { version = "0.25.1", features = ["png", "rayon"], default-features = false }
+notify = { version = "7.0.0", features = ["crossbeam-channel"] }
+tokio = { version = "1.37.0", features = ["rt-multi-thread", "macros"] }
+futures-util = { version = "0.3.30", default-features = false }
+glib = "0.20.0"
+itertools = "*"
+flume = { version = "0.11.0", default-features = false, features = ["async"] }
+xflags = "0.4.0-pre.2"
+
+# for tracing with tokio-console
+console-subscriber = { version = "0.4.0", optional = true }
+
+[profile.production]
+inherits = "release"
+lto = "fat"
+
+[features]
+default = ["nightly"]
+nightly = ["ratatui-image/vb64"]
+tracing = ["tokio/tracing", "dep:console-subscriber"]
+
+[dev-dependencies]
+criterion = { version = "0.5.1", features = ["async_tokio"] }
+cpuprofiler = "0.0.4"
+
+[[bench]]
+name = "rendering"
+harness = false
+
+[[bin]]
+name = "for_profiling"
+path = "./benches/for_profiling.rs"
+
+[lints.clippy]
+uninlined_format_args = "warn"
+redundant_closure_for_method_calls = "warn"
+cast_lossless = "warn"
+single_char_pattern = "warn"
+manual_let_else = "warn"
+ignored_unit_patterns = "warn"
+range_plus_one = "warn"
+unreadable_literal = "warn"
+redundant_else = "warn"
+assigning_clones = "warn"
+bool_to_int_with_if = "warn"
+borrow_as_ptr = "warn"
+cast_ptr_alignment = "warn"
+checked_conversions = "warn"
+copy_iterator = "warn"
+default_trait_access = "warn"
+doc_link_with_quotes = "warn"
+empty_enum = "warn"
+explicit_into_iter_loop = "warn"
+explicit_iter_loop = "warn"
+filter_map_next = "warn"
+flat_map_option = "warn"
+fn_params_excessive_bools = "warn"
+from_iter_instead_of_collect = "warn"
+implicit_clone = "warn"
+index_refutable_slice = "warn"
+inefficient_to_string = "warn"
+invalid_upcast_comparisons = "warn"
+iter_filter_is_ok = "warn"
+iter_filter_is_some = "warn"
+iter_not_returning_iterator = "warn"
+large_futures = "warn"
+large_stack_arrays = "warn"
+large_types_passed_by_value = "warn"
+linkedlist = "warn"
+macro_use_imports = "warn"
+manual_assert = "warn"
+manual_instant_elapsed = "warn"
+manual_is_power_of_two = "warn"
+manual_is_variant_and = "warn"
+manual_ok_or = "warn"
+manual_string_new = "warn"
+many_single_char_names = "warn"
+manual_unwrap_or = "warn"
+match_on_vec_items = "warn"
+match_same_arms = "warn"
+match_wildcard_for_single_variants = "warn"
+maybe_infinite_iter = "warn"
+mismatching_type_param_order = "warn"
+missing_fields_in_debug = "warn"
+mut_mut = "warn"
+needless_bitwise_bool = "warn"
+needless_continue = "warn"
+needless_for_each = "warn"
+needless_pass_by_value = "warn"
+needless_raw_string_hashes = "warn"
+no_effect_underscore_binding = "warn"
+no_mangle_with_rust_abi = "warn"
+option_as_ref_cloned = "warn"
+option_option = "warn"
+ptr_as_ptr = "warn"
+ptr_cast_constness = "warn"
+range_minus_one = "warn"
+ref_as_ptr = "warn"
+ref_binding_to_reference = "warn"
+ref_option = "warn"
+ref_option_ref = "warn"
+return_self_not_must_use = "warn"
+same_functions_in_if_condition = "warn"
+should_panic_without_expect = "warn"
+similar_names = "warn"
+stable_sort_primitive = "warn"
+str_split_at_newline = "warn"
+struct_excessive_bools = "warn"
+struct_field_names = "warn"
+transmute_ptr_to_ptr = "warn"
+trivially_copy_pass_by_ref = "warn"
+unicode_not_nfc = "warn"
+unnecessary_box_returns = "warn"
+unnecessary_join = "warn"
+unnecessary_literal_bound = "warn"
+unnecessary_wraps = "warn"
+unnested_or_patterns = "warn"
+unused_async = "warn"
+unused_self = "warn"
+used_underscore_binding = "warn"
+used_underscore_items = "warn"
+zero_sized_map_values = "warn"

@@ -1,0 +1,55 @@
+EAPI=8
+
+inherit cargo
+
+DESCRIPTION="A terminal-based PDF viewer."
+HOMEPAGE="https://github.com/itsjunetime/tdf"
+#SRC_URI="https://github.com/itsjunetime/tdf/archive/refs/tags/v0.1.0.tar.gz"
+
+LICENSE="MPL-2.0"
+SLOT="0"
+KEYWORDS="amd64 x86"
+IUSE=""
+
+DEPEND="x11-libs/cairo 
+		app-text/poppler 
+		dev-lang/rust-bin"
+RDEPEND="${DEPEND}"
+
+#DOCS=( LICENSE  README  CHANGELOG )
+
+GITHUB_REPO="tdf"
+GITHUB_USER="itsjunetime"
+GITHUB_TAG="d5284be12353444a51a384e3146c67e878a6866f"
+SRC_URI="
+		https://github.com/${GITHUB_USER}/${GITHUB_REPO}/tarball/${GITHUB_TAG}/ -> ${PN}-${GITHUB_TAG}.tar.gz
+		${CARGO_CRATE_URIS}
+		"
+
+declare -A GIT_CRATES=(
+	[ratatui]="https://github.com/itsjunetime/ratatui/tree/87f0d2a38a72caf2fe328860b978506ff173e7bc"
+	[ratatui-image]="https://github.com/itsjunetime/ratatui-image/commit/cb4b4ffab6483bd280e01d5a1bc71de688521a87"
+)
+
+src_unpack() {
+  unpack ${A}
+  mv "${WORKDIR}/${GITHUB_USER}-${GITHUB_REPO}"-??????? "${S}" || die
+      # Fetch dependencies for ratatui and ratatui-image from Git
+  git-r3_src_unpack 
+}
+
+#QA_FLAGS_IGNORED="usr/bin/${PN}"
+
+
+#src_prepare() {
+##	eautoreconf
+#	default
+#}
+
+src_compile() {
+    cargo build --release --locked || die "Cargo build failed"
+    }
+
+#src_install() {
+#    cargo install --root "${D}" --path .
+#    }
