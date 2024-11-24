@@ -326,7 +326,7 @@ declare -A GIT_CRATES=(
 	[ratatui-image]='https://github.com/itsjunetime/ratatui-image;cb4b4ffab6483bd280e01d5a1bc71de688521a87;ratatui-image-%commit%'
 	[ratatui]='https://github.com/itsjunetime/ratatui;8bf0c1ef772e6f04785a26d69fac04cec56ed2f6;ratatui-%commit%/ratatui'
 #	[ratatui]='https://github.com/itsjunetime/ratatui;87f0d2a38a72caf2fe328860b978506ff173e7bc;ratatui-%commit%/ratatui'
-#	[vb64]='https://github.com/lukaslihotzki/vb64;01e791186f57982511a3bcfb0d2316010c1adef0;vb64-%commit%'
+	[vb64]='https://github.com/lukaslihotzki/vb64;01e791186f57982511a3bcfb0d2316010c1adef0;vb64-%commit%'
 )
 
 inherit cargo
@@ -338,6 +338,7 @@ SRC_URI="
 	${CARGO_CRATE_URIS}
 "
 #	https://github.com/itsjunetime/ratatui/tarball/${RATATUI_COMMIT_HASH} -> ratatui-commit.tar.gz
+#https://github.com/itsjunetime/tdf/archive/refs/tags/v0.1.0.tar.gz
 
 
 LICENSE="MPL-2.0"
@@ -367,9 +368,12 @@ modify_cargo_toml() {
     # Comment out the line with the git URL
     sed -i '/ratatui = { git = "https:\/\/github.com\/itsjunetime\/ratatui.git" }/s/^/# /' "$file"
     # Uncomment the line with the path URL
-    sed -i '/# ratatui = { path = ".\/ratatui" }/s/^# //' "$file"
-}
+    sed -i '/# ratatui = { path = ".\/ratatui" }/s/^# //; s|./ratatui|./ratatui/ratatui|' "$file"
+    local search_ratatui_image='ratatui-image = { git'
+    sed -i "s|$search_ratatui_image|# $search_ratatui_image|" "$file"
 
+    sed -i '/^# ratatui-image = { path = "\.\/ratatui\/ratatui-image", features = \["rustix", "vb64"\], default-features = false }/s/^# //; s|\.\/ratatui\/ratatui-image|\.\/ratatui-image|' "$file"
+    }
 # Function to search and modify Cargo.toml files in the provided directory
 search_and_modify() {
     local directory="$1"
@@ -404,9 +408,6 @@ src_unpack() {
   unpack ${A}
   mv "${WORKDIR}/${GITHUB_USER}-${GITHUB_REPO}"-??????? "${S}" || die
 
-  # Extract the ratatui tarball
-#  tar -xvzf "${DISTDIR}/ratatui-commit.tar.gz" -C "${WORKDIR}"
-
   # Move extracted files to the correct directory
   mv "${WORKDIR}/ratatui-${RATATUI_COMMIT_HASH}"/* "${S}/ratatui" || die "Failed to move extracted ratatui directory"
   mv "${WORKDIR}/ratatui-image-${RATATUI_IMAGE_COMMIT_HASH}"/* "${S}/ratatui-image" || die "Failed to move extracted ratatui directory"
@@ -421,8 +422,6 @@ src_configure() {
 }
 
 src_compile() {
-    cargo clean
-    cargo update
 	cargo_gen_config
     cargo_src_compile 
 #    cargo build -v --offline --release || die "Cargo build failed"
