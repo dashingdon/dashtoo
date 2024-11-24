@@ -404,7 +404,6 @@ src_prepare() {
 
 
 src_unpack() {
-#  echo "${S}"
   unpack ${A}
   mv "${WORKDIR}/${GITHUB_USER}-${GITHUB_REPO}"-??????? "${S}" || die
 
