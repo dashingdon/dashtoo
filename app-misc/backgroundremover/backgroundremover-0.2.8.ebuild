@@ -1,4 +1,4 @@
-# Copyright 2023 Gentoo Authors
+# Copyright 2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -17,7 +17,6 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 
-# shellcheck disable=SC2016
 RDEPEND="$(python_gen_cond_dep 'dev-python/pysocks[${PYTHON_USEDEP}]
 		dev-python/certifi[${PYTHON_USEDEP}]
 		dev-python/ffmpeg-python[${PYTHON_USEDEP}]
