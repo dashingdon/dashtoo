@@ -315,7 +315,8 @@ CRATES="
 
 GITHUB_REPO="tdf"
 GITHUB_USER="itsjunetime"
-GITHUB_TAG="d5284be12353444a51a384e3146c67e878a6866f"
+#GITHUB_TAG="d5284be12353444a51a384e3146c67e878a6866f"
+GITHUB_TAG="cc46791627bf7d3bce6abb68cac2fc0e4f5dac34"
 
 # Ratatui crate commit hash
 RATATUI_COMMIT_HASH="8bf0c1ef772e6f04785a26d69fac04cec56ed2f6"
@@ -365,15 +366,23 @@ QA_FLAGS_IGNORED="/usr/bin/${PN}"
 # Function to modify the Cargo.toml file
 modify_cargo_toml() {
     local file="$1"
-    # Comment out the line with the git URL
+	# Comment out the line with the git URL
     sed -i '/ratatui = { git = "https:\/\/github.com\/itsjunetime\/ratatui.git" }/s/^/# /' "$file"
     # Uncomment the line with the path URL
-    sed -i '/# ratatui = { path = ".\/ratatui" }/s/^# //; s|./ratatui|./ratatui/ratatui|' "$file"
+    sed -i '/# ratatui = { path = ".\/ratatui\/ratatui" }/s/^# //; s|./ratatui/ratatui|./ratatui/ratatui|' "$file"
+
     local search_ratatui_image='ratatui-image = { git'
     sed -i "s|$search_ratatui_image|# $search_ratatui_image|" "$file"
 
-    sed -i '/^# ratatui-image = { path = "\.\/ratatui\/ratatui-image", features = \["rustix", "vb64"\], default-features = false }/s/^# //; s|\.\/ratatui\/ratatui-image|\.\/ratatui-image|' "$file"
-    }
+    sed -i '/# ratatui-image = { path = ".\/ratatui-image", features = \["vb64"\], default-features = false }/s/^# //' "$file"
+#    local ri_search='# ratatui-image = { path = ".\/ratatui-image", features = \["vb64"\], default-features = false }'
+#    local rif_search='ratatui-image = { path = "./ratatui-image", features = ["vb64"], default-features = false }'
+
+#	sed -i "s|$ri_search|$rif_search|" "$file"
+#    sed -i '/^# ratatui-image = { path = "\.\/ratatui\/ratatui-image", features = \["rustix", "vb64"\], default-features = false }/s/^# //; s|\.\/ratatui\/ratatui-image|\.\/ratatui-image|' "$file" 
+
+	}	
+
 # Function to search and modify Cargo.toml files in the provided directory
 search_and_modify() {
     local directory="$1"
@@ -417,11 +426,14 @@ src_unpack() {
 }
 
 src_configure() {
+#	rm Cargo.lock
+#	cargo update
+#	cargo fix
 	cargo_src_configure
 }
 
 src_compile() {
-	cargo_gen_config
+#	cargo_gen_config
     cargo_src_compile 
 #    cargo build -v --offline --release || die "Cargo build failed"
     }
