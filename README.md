@@ -1,6 +1,5 @@
 # dashtoo
 
-
 dashtoo: gentoo ebuilds
 
 # syntax
@@ -9,12 +8,9 @@ dashtoo: gentoo ebuilds
 
 
 
-
-
 # index
   - media-video
     - freetube `[ working - version bump]`
-      - freetube-0.23.5.ebuild
       - freetube-0.23.4.ebuild
       - freetube-0.23.2.ebuild
       - freetube-0.22.1.ebuild
@@ -23,14 +19,6 @@ dashtoo: gentoo ebuilds
       - i3status-2.15.ebuild
     - polybar `[ working - bug fix patch https://bugs.gentoo.org/953553 ]`
       - polybar-3.7.2.ebuild 
-
-
-
-
-
-
-
-
 
 
 
