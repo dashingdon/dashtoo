@@ -1,4 +1,4 @@
-# Copyright 2023 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -20,11 +20,14 @@ KEYWORDS="~amd64"
 # shellcheck disable=SC2016
 RDEPEND="$(python_gen_cond_dep 'dev-python/pysocks[${PYTHON_USEDEP}]
 		dev-python/certifi[${PYTHON_USEDEP}]
+		dev-python/decorator[${PYTHON_USEDEP}]
 		dev-python/ffmpeg-python[${PYTHON_USEDEP}]
 		dev-python/filetype[${PYTHON_USEDEP}]
 		dev-python/hsh[${PYTHON_USEDEP}]
 		dev-python/gpep517[${PYTHON_USEDEP}]
 		dev-python/idna[${PYTHON_USEDEP}]
+		dev-python/imageio[${PYTHON_USEDEP}]
+		dev-python/imageio-ffmpeg[${PYTHON_USEDEP}]
 		dev-python/more-itertools[${PYTHON_USEDEP}]
 		<dev-python/moviepy-2.0[${PYTHON_USEDEP}]
 		dev-python/numpy[${PYTHON_USEDEP}]
@@ -33,6 +36,7 @@ RDEPEND="$(python_gen_cond_dep 'dev-python/pysocks[${PYTHON_USEDEP}]
 		dev-python/requests[${PYTHON_USEDEP}]
 		dev-python/scikit-image[${PYTHON_USEDEP}]
 		dev-python/six[${PYTHON_USEDEP}]
+		dev-python/scipy[${PYTHON_USEDEP}]
 		dev-python/tqdm[${PYTHON_USEDEP}]
 		dev-python/urllib3[${PYTHON_USEDEP}]
 		dev-python/waitress[${PYTHON_USEDEP}]')
