@@ -26,18 +26,12 @@ src_prepare() {
 src_install() {
     # Create the directory for LocalSend
     mkdir -p "${D}/opt/localsend"
-    echo "distdir ${DISTDIR}"
-    echo "dir ${D}"
 
-#    chmod +x "/var/cache/distfiles/LocalSend-1.17.0-linux-x86-64.AppImage"
     ## Copy the AppImage to /opt/localsend using doins
     doins "${DISTDIR}/LocalSend-${PV}-linux-x86-64.AppImage"
-#    cp "/var/cache/distfiles/LocalSend-1.17.0-linux-x86-64.AppImage" "${D}/opt/ls.AppImage"
-    echo "copied"
     
     # Rename the AppImage to localsend.AppImage in the destination
     mv "${D}/LocalSend-${PV}-linux-x86-64.AppImage" "${D}/opt/localsend/localsend.AppImage"
-    echo "moved"
     
     # Make the AppImage executable
     chmod +x "${D}/opt/localsend/localsend.AppImage"

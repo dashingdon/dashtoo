@@ -14,13 +14,14 @@ HOMEPAGE="https://llvmlite.readthedocs.io/en/latest/ https://pypi.org/project/ll
 LICENSE="BSD-2"
 SLOT="0/0.44.0"
 KEYWORDS="~amd64"
+RESTRICT="strip"
 
-BDEPEND="llvm-core/llvm:20"
+BDEPEND="llvm-core/llvm:15"
 RDEPEND="${BDEPEND}"
 DEPEND="${RDEPEND}"
 
 python_compile() {
-	export "LLVM_CONFIG=${EPREFIX}/usr/lib/llvm/20/bin/llvm-config"
+	export "LLVM_CONFIG=${EPREFIX}/usr/lib/llvm/15/bin/llvm-config"
 	distutils-r1_python_compile
 }
 
