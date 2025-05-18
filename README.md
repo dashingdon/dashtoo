@@ -17,13 +17,14 @@ https://www.tablesgenerator.com/markdown_tables
 
 | category    | atom              | versions                    | working | latest                                      |
 |-------------|-------------------|-----------------------------|---------|---------------------------------------------|
-| app-misc    | yazi              | 0.4.2                       | yes     |                                             |
+| app-misc    | yazi              | 0.4.2                       | yes     | outdated. use `cargo install --locked yazi-fm yazi-cli`          |
 |             | tdf               | 0.1.0                       | no      |                                             |
 | dev-python  | hsh               | 1.1.0                       | yes     |                                             |
 |             | llvmlite          | 0.44.0                      | yes     | requires llvm:15                            |
 |             | moviepy           | 2.1.2                       | yes     |                                             |
 |             | numba             | 0.61.2                      | yes     | python 3.13                                 |
 |             | proglog           | 0.1.12                      | yes     |                                             |
+|             | commandlines      | 0.4.1-r2                    | yes     |                                             |
 |             | pymatting         | 1.1.13                      | yes     | python 3.13                                 |
 | media-gfx   | backgroundremover | 0.2.8/0.3.4                 | yes     | install python modules manually             |
 | media-video | freetube          | 0.22.1/0.23.2/0.23.4/0.24.5 | yes     |                                             |
