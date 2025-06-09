@@ -19,7 +19,7 @@ https://www.tablesgenerator.com/markdown_tables
 |-------------|-------------------|-----------------------------|---------|---------------------------------------------------------|
 | app-misc    | yazi              | 0.4.2                       | yes     | outdated. use `cargo install --locked yazi-fm yazi-cli` |
 |             | tdf               | 0.1.0                       | no      |                                                         |
-|             | ticker            | 5.0.2                       | yes     |                                                         |
+|             | ticker            | 5.0.2/5.0.5                 | yes     |                                                         |
 | dev-python  | hsh               | 1.1.0                       | yes     |                                                         |
 |             | llvmlite          | 0.44.0                      | yes     | requires llvm:15                                        |
 |             | moviepy           | 2.1.2                       | yes     |                                                         |
