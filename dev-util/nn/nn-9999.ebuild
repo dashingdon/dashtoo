@@ -16,10 +16,10 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="
-    app-misc/fzf:0.62.0
-    app-text/glow:2.0.0
-    sys-apps/ripgrep:14.1.1
-    dev-vcs/git:2.50.0
+    app-misc/fzf:0.62
+    app-text/glow:2.0
+    sys-apps/ripgrep:14.1
+    dev-vcs/git:2.50
 "
 
 src_prepare() {
