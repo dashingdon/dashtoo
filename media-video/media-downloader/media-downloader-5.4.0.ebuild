@@ -17,7 +17,6 @@ IUSE=""
 RESTRICT="strip"
 
 RDEPEND="
-    dev-libs/gtkmm:3.0
     dev-libs/glibmm:2.4
     dev-libs/libsigc++:2.0
     media-libs/gstreamer:0.10
