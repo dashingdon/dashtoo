@@ -17,10 +17,10 @@ IUSE=""
 RESTRICT="strip"
 
 RDEPEND="
-    dev-libs/glibmm:2.4
-    dev-libs/libsigc++:2.0
-    media-libs/gstreamer:0.10
-    media-libs/gstreamer-plugins-base:0.10
+	dev-libs/gtkmm
+    dev-libs/glibmm
+    dev-libs/libsigc++
+    media-libs/gstreamer
 "
 
 S="${WORKDIR}/media-downloader-${PV}"
