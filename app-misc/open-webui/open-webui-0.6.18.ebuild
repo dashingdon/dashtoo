@@ -1,0 +1,159 @@
+# Copyright 2025 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+DISTUTILS_USE_PEP517=hatchling
+PYTHON_COMPAT=( python3_1{0,1,2,3} )
+
+inherit distutils-r1
+
+DESCRIPTION="Open‑WebUI v0.6.18 backend and frontend server"
+HOMEPAGE="https://github.com/open-webui/open-webui"
+SRC_URI="https://github.com/open-webui/open-webui/archive/refs/tags/v0.6.18.tar.gz -> ${P}.tar.gz"
+
+LICENSE="MIT"
+SLOT="0"
+KEYWORDS=""
+IUSE=""
+
+BDEPEND="net-libs/nodejs"
+
+DEPEND="
+    dev-python/fastapi[${PYTHON_USEDEP}]
+    dev-python/uvicorn[${PYTHON_USEDEP}]
+    dev-python/pydantic[${PYTHON_USEDEP}]
+    dev-python/python-multipart[${PYTHON_USEDEP}]
+    dev-python/python-socketio[${PYTHON_USEDEP}]
+    dev-python/python-jose[${PYTHON_USEDEP}]
+    dev-python/passlib[bcrypt,${PYTHON_USEDEP}]
+    dev-python/cryptography[${PYTHON_USEDEP}]
+    dev-python/requests[${PYTHON_USEDEP}]
+    dev-python/aiohttp[${PYTHON_USEDEP}]
+    dev-python/async-timeout[${PYTHON_USEDEP}]
+    dev-python/aiocache[${PYTHON_USEDEP}]
+    dev-python/aiofiles[${PYTHON_USEDEP}]
+    dev-python/starlette-compress[${PYTHON_USEDEP}]
+    dev-python/httpx[socks,http2,zstd,cli,brotli,${PYTHON_USEDEP}]
+    dev-python/sqlalchemy[${PYTHON_USEDEP}]
+    dev-python/alembic[${PYTHON_USEDEP}]
+    dev-python/peewee[${PYTHON_USEDEP}]
+    dev-python/peewee-migrate[${PYTHON_USEDEP}]
+    dev-python/psycopg2-binary[${PYTHON_USEDEP}]
+    dev-python/pgvector[${PYTHON_USEDEP}]
+    dev-python/pymysql[${PYTHON_USEDEP}]
+    dev-python/bcrypt[${PYTHON_USEDEP}]
+    dev-python/pymongo[${PYTHON_USEDEP}]
+    dev-python/redis[${PYTHON_USEDEP}]
+    dev-python/boto3[${PYTHON_USEDEP}]
+    dev-python/argon2-cffi[${PYTHON_USEDEP}]
+    dev-python/apscheduler[${PYTHON_USEDEP}]
+    dev-python/pycrdt[${PYTHON_USEDEP}]
+    dev-python/RestrictedPython[${PYTHON_USEDEP}]
+    dev-python/loguru[${PYTHON_USEDEP}]
+    dev-python/asgiref[${PYTHON_USEDEP}]
+    dev-python/openai[${PYTHON_USEDEP}]
+    dev-python/anthropic[${PYTHON_USEDEP}]
+    dev-python/google-genai[${PYTHON_USEDEP}]
+    dev-python/google-generativeai[${PYTHON_USEDEP}]
+    dev-python/tiktoken[${PYTHON_USEDEP}]
+    dev-python/langchain[${PYTHON_USEDEP}]
+    dev-python/langchain-community[${PYTHON_USEDEP}]
+    dev-python/fake-useragent[${PYTHON_USEDEP}]
+    dev-python/chromadb[${PYTHON_USEDEP}]
+    dev-python/pymilvus[${PYTHON_USEDEP}]
+    dev-python/qdrant-client[${PYTHON_USEDEP}]
+    dev-python/opensearch-py[${PYTHON_USEDEP}]
+    dev-python/playwright[${PYTHON_USEDEP}]
+    dev-python/elasticsearch[${PYTHON_USEDEP}]
+    dev-python/pinecone[${PYTHON_USEDEP}]
+    dev-python/transformers[${PYTHON_USEDEP}]
+    dev-python/sentence-transformers[${PYTHON_USEDEP}]
+    dev-python/accelerate[${PYTHON_USEDEP}]
+    dev-python/colbert-ai[${PYTHON_USEDEP}]
+    dev-python/einops[${PYTHON_USEDEP}]
+    dev-python/ftfy[${PYTHON_USEDEP}]
+    dev-python/pypdf[${PYTHON_USEDEP}]
+    dev-python/fpdf2[${PYTHON_USEDEP}]
+    dev-python/pymdown-extensions[${PYTHON_USEDEP}]
+    dev-python/docx2txt[${PYTHON_USEDEP}]
+    dev-python/python-pptx[${PYTHON_USEDEP}]
+    dev-python/unstructured[${PYTHON_USEDEP}]
+    dev-python/nltk[${PYTHON_USEDEP}]
+    dev-python/markdown[${PYTHON_USEDEP}]
+    dev-python/pypandoc[${PYTHON_USEDEP}]
+    dev-python/pandas[${PYTHON_USEDEP}]
+    dev-python/openpyxl[${PYTHON_USEDEP}]
+    dev-python/pyxlsb[${PYTHON_USEDEP}]
+    dev-python/xlrd[${PYTHON_USEDEP}]
+    dev-python/validators[${PYTHON_USEDEP}]
+    dev-python/psutil[${PYTHON_USEDEP}]
+    dev-python/sentencepiece[${PYTHON_USEDEP}]
+    dev-python/soundfile[${PYTHON_USEDEP}]
+    dev-python/azure-ai-documentintelligence[${PYTHON_USEDEP}]
+    dev-python/pillow[${PYTHON_USEDEP}]
+    dev-python/opencv-python-headless[${PYTHON_USEDEP}]
+    dev-python/rapidocr-onnxruntime[${PYTHON_USEDEP}]
+    dev-python/rank-bm25[${PYTHON_USEDEP}]
+    dev-python/onnxruntime[${PYTHON_USEDEP}]
+    dev-python/faster-whisper[${PYTHON_USEDEP}]
+    dev-python/PyJWT[crypto,${PYTHON_USEDEP}]
+    dev-python/authlib[${PYTHON_USEDEP}]
+    dev-python/black[${PYTHON_USEDEP}]
+    dev-python/langfuse[${PYTHON_USEDEP}]
+    dev-python/youtube-transcript-api[${PYTHON_USEDEP}]
+    dev-python/pytube[${PYTHON_USEDEP}]
+    dev-python/pydub[${PYTHON_USEDEP}]
+    dev-python/ddgs[${PYTHON_USEDEP}]
+    dev-python/docker[${PYTHON_USEDEP}]
+    dev-python/pytest[${PYTHON_USEDEP}]
+    dev-python/pytest-docker[${PYTHON_USEDEP}]
+    dev-python/googleapis-common-protos[${PYTHON_USEDEP}]
+    dev-python/google-cloud-storage[${PYTHON_USEDEP}]
+    dev-python/azure-identity[${PYTHON_USEDEP}]
+    dev-python/azure-storage-blob[${PYTHON_USEDEP}]
+    dev-python/ldap3[${PYTHON_USEDEP}]
+    dev-python/firecrawl-py[${PYTHON_USEDEP}]
+    dev-python/tencentcloud-sdk-python[${PYTHON_USEDEP}]
+    dev-python/gcp-storage-emulator[${PYTHON_USEDEP}]
+    dev-python/moto[s3,${PYTHON_USEDEP}]
+    dev-python/posthog[${PYTHON_USEDEP}]
+"
+
+RDEPEND="${DEPEND}"
+
+src_prepare() {
+    default
+}
+
+src_compile() {
+    local frontend_dir="${WORKDIR}/open-webui-${PV}/frontend"
+
+    if [[ ! -d "${frontend_dir}" ]]; then
+        ewarn "Frontend directory missing, creating empty stub"
+        mkdir -p "${frontend_dir}"
+        # echo '{}' > "${frontend_dir}/package.json"
+        echo '' > "${frontend_dir}/index.html"
+        cp "${WORKDIR}/open-webui-${PV}/package.json" "${frontend_dir}/package.json"
+        cp "${WORKDIR}/open-webui-${PV}/package-lock.json" "${frontend_dir}/package-lock.json"
+    fi
+
+    cd "${frontend_dir}" || die
+    npm ci || die "npm ci failed"
+    npm run build || die "npm run build failed"
+
+    cd "${WORKDIR}/open-webui-${PV}/backend" || die
+    distutils-r1_src_compile
+}
+
+src_install() {
+    cd "${WORKDIR}/open-webui-${PV}/backend" || die
+    distutils-r1_src_install
+
+    insinto /usr/share/open-webui/frontend
+    doins -r "${WORKDIR}/open-webui-${PV}/frontend/dist" || die "Installing frontend dist failed"
+}
+
+python_compile_all() {
+    distutils-r1_python_compile_all
+}
