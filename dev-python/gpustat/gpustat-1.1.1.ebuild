@@ -19,6 +19,8 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
+RESTRICT="strip"
+
 RDEPEND="dev-python/blessed
          dev-python/nvidia-ml-py"
 
