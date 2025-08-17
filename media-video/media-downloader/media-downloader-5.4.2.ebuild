@@ -16,18 +16,12 @@ IUSE=""
 
 RESTRICT="strip"
 
-
 RDEPEND="
-<<<<<<< Updated upstream
-	dev-cpp/gtkmm:4.0
-	"
-=======
-   dev-libs/gtkmm
-   dev-libs/glibmm
-   dev-libs/libsigc++
-   media-libs/gstreamer
+    dev-cpp/gtkmm:4.0
+    dev-libs/glibmm
+    dev-libs/libsigc++
+    media-libs/gstreamer
 "
->>>>>>> Stashed changes
 
 S="${WORKDIR}/media-downloader-${PV}"
 
