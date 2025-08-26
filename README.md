@@ -31,6 +31,7 @@ https://www.tablesgenerator.com/markdown_tables
 | media-gfx   | [backgroundremover](https://github.com/nadermx/backgroundremover)    | 0.2.8/0.3.4                 | yes     | install python modules manually                         |
 | media-video | [freetube](https://github.com/FreeTubeApp/FreeTube)                  | 0.22.1/0.23.2/0.23.4/0.24.5 | yes     |                                                         |
 |             | [media-downloader](https://github.com/mhogomchungu/media-downloader) | 5.4.0                       | yes     |                                                         |
+|             | [GopherTube](https://github.com/KrishnaSSH/GopherTube)               | 2.8.0                       | yes     | install chafa for thumbnails                            |
 | net-misc    | [localsend](https://github.com/localsend/localsend)                  | 1.17.0                      | yes     | AppImage based                                          |
 |             | [ddgr](https://github.com/jarun/ddgr )                               | 2.2                         | yes     |                                                         |
 | x11-misc    | [i3-resurrect](https://github.com/JonnyHaystack/i3-resurrect)        | 1.4.5                       | yes     | python 3.13                                             |
